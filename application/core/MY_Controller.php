@@ -89,6 +89,20 @@ class MY_Controller extends CI_Controller {
 		}
 
 
+		protected function addmViewData($arr = array())
+		{	
+			$this->mViewData['userdata'] = empty($this->mViewData['userdata']) ? 
+										   $arr : array_merge($this->mViewData['userdata'], $arr);
+			
+		}
+
+
+		protected function getBaseUrl()
+		{
+			return $this->mBaseUrl;
+		}
+
+
 
 	
 }

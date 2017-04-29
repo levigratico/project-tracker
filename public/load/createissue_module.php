@@ -1,8 +1,3 @@
-        <?php if (!empty($userdata['track_id'])): ?>
-            <?php echo '<input type="hidden" id="track_id" value="'. urldecode($userdata['track_id']) .'"/>'; ?>
-            <?php echo PHP_EOL; ?>
-            <?php echo '<input type="hidden" id="approved" value="'. urldecode($userdata['issue_approved_by_id']) .'"/>'; ?>
-        <?php endif ?>
        <li class="ui-state-default">
                 <div class="tabIssue" id="tabIssue">
                     <!-- tab title -->
@@ -18,80 +13,75 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="md-form">
-                                       <input type="text" id="form3" class="form-control" value="<?php echo empty($userdata['track_title']) ? '' : urldecode($userdata['track_title']); ?>">
+                                       <input type="text" id="form3" class="form-control">
                                        <label for="form3">Issue Title:</label>
                                    </div>
                                    <!--DROPDOWN FOR ASSIGN-->
                                    <div class="btn-group pull-right">
                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
                                        <div class="dropdown-menu">
-                                          <?php loopDropDownItem($userdata['user_tbl'], 0); ?>
+                                            <?php loopDropDownItem($userdata['user_tbl']); ?>
                                        </div>
                                    </div>
                                     <div class="divassigned">
-                                        <p>Assigned to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-
+                                        <p>Assigned to: </p>
                                     </div>
                                       <!--DROPDOWN FOR MODULE-->
                                     <div class="btn-group pull-right">
                                         <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['modules_tbl'], 1); ?>
+                                            <a class="dropdown-item" href="#">Bug <img class="iconBug pull-right" src="public/img/ladybug.png" style="width: 20px; height: 20px"></a>
+                                            <a class="dropdown-item" href="#">Features <img class="iconBug pull-right" src="public/img/star.png" style="width: 20px; height: 20px"></a>
                                         </div>
                                     </div>
                                     <div class="divmodule" style="border-color: red">
-                                       <p>Module Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
+                                       <p>Module Type: </p>
+                                    </div>  
                                     <!--DROPDOWN FOR QA-->
                                     <div class="btn-group pull-right">
                                         <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['qa_type_tbl'], 2); ?>
+                                           <?php loopDropDownItem($userdata['qa_type_tbl']); ?>
                                         </div>
                                     </div>
                                     <div class="divqa" style="border-color: red">
-                                       <p>QA Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
+                                       <p>QA Type: </p>
                                     </div>
                                     <!--DROPDOWN FOR GIT-->
                                     <div class="btn-group pull-right">
                                         <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['git_repo_tbl'], 3); ?>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
                                     <div class="divgit" style="border-color: red">
-                                       <p>Git Repository:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
+                                       <p>Git Repository: </p>
                                     </div>
                                     <!--DROPDOWN FOR PLATFORM-->
                                     <div class="btn-group pull-right">
                                         <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['platform_type'], 4); ?>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
                                     <div class="divplat" style="border-color: red">
-                                       <p>Platform type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
+                                       <p>Platform type: </p>
                                     </div>
                                     <!--DROPDOWN FOR PRIORITY-->
                                     <div class="btn-group pull-right">
                                         <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
                                         <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['priority_level'], 5); ?>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
                                         </div>
                                     </div>
                                     <div class="divpriority" style="border-color: red">
-                                       <p>Priority Level:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
-
-                                     <!--DROPDOWN FOR PRIORITY-->
-                                    <div class="btn-group pull-right">
-                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['issue_type'], 6); ?>
-                                        </div>
-                                    </div>
-                                    <div class="divissuetype" style="border-color: red">
-                                       <p>Issue Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
+                                       <p>Priority Level: </p>
                                     </div>
 
                                     <div class="md-form">

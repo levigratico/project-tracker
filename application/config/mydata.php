@@ -21,7 +21,6 @@ $config['mydata'] = array(
 			'public/js/tether.min.js',
 			'public/js/bootstrap.min.js',
 			'public/js/mdb.min.js',
-			'public/js/jquery-1.12.4.js',
 			'http://code.jquery.com/ui/1.12.1/jquery-ui.js'
 		)
 	),
@@ -41,6 +40,9 @@ $config['mydata'] = array(
 
 
 	);
+
+
+$config['tables'] = array('child_module_tbl', 'departments_tbl', 'git_repo_tbl', 'issue_tbl', 'issue_type', 'modules_tbl', 'platform_type', 'platform_type_accounts', 'priority_level', 'qa_type_tbl', 'status', 'user_tbl');
 
 
 

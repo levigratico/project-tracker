@@ -11,8 +11,7 @@ class Main extends  MY_Controller {
 
 	public function index()
 	{
-		$this->add_script('public/js/sortable.js');
-		$this->render('body/issues');
+		
 	}
 
 }
