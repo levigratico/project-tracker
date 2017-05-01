@@ -32,4 +32,4 @@
      ?>
 
 </head>
-<body class="<?php echo $body_class; ?>">
+<body class="<?php echo $body_class; ?>" style="overflow-y: auto !important; height: 100%;">

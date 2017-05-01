@@ -11,6 +11,14 @@ class Main extends  MY_Controller {
 
 	public function index()
 	{
+		$this->add_script('public/js/main.js');
+		$this->render('body/mainview');
+	}
+
+
+
+	public function check()
+	{
 		
 	}
 
