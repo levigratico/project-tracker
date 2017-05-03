@@ -2,40 +2,20 @@
         <div class="trackProfile">
             <div class="form-inline">
                 <img src="<?php echo base_url(); ?>public/img/circle.png" style="width: 45px; height: 45px; margin: 10px 20px 10px 30px">
-                <p class="profileName"><?php echo $user_name; ?></p>
+                <p class="profileName"><?php echo $this->session->userdata('firstname'); ?></p>
                 <i class="fa fa-chevron-down iconChevTwo" style="color: white" aria-hidden="true"></i>
             </div>
         </div>
-        <div class="divBtnIssue">
-        <center><button type="button" class="btn btn-primary btncreate" id="btncreateissue">Create Issue</button><center>
-        </div>
+        <!-- create issue button -->
+        <?php if ($this->session->userdata('access_type') != 1): ?>
+            <?php  $this->load->view('_partials/sidebar/createbtnissue');?>
+        <?php endif ?>
+        <!-- ./end of create issue button -->
         <div class="menu" style="padding: 10px 30px 30px 30px;">
-            <div class="col" style="margin: 20px 20px 20px 20px">
-                <a href="/public/mywork.php"><div class="row">
-                    <img src="<?php echo base_url(); ?>public/img/inbox.png" style="width: 30px; height: 30px">
-                    <p class="pWork"> My Work </p>
-                </div>
-            </div>
-
-           <div class="col" style="margin: 20px 20px 20px 20px">
-               <div class="row">
-                   <img src="<?php echo base_url(); ?>public/img/server.png" style="width: 30px; height: 30px">
-                   <p class="pCurrent"> Current/Backlog</p>
-               </div>
-            </div>
-
-           <div class="col" style="margin: 20px 20px 20px 20px">
-               <div class="row">
-                   <img src="<?php echo base_url(); ?>public/img/search-problem.png" style="width: 30px; height: 30px">
-                   <p class="pIssue">Issue</p>
-               </div>
-           </div>
-
-           <div class="col" style="margin: 20px 20px 20px 20px">
-               <div class="row">
-                   <img src="<?php echo base_url(); ?>public/img/browser.png" style="width: 30px; height: 30px">
-                   <p class="pDone"> Done </p>
-               </div>
-           </div>
+        <!-- menulist -->
+        <?php foreach ($sidebar as $key => $value): ?>
+            <?php $this->load->view('_partials/sidebar/menulist', $value); ?>
+        <?php endforeach ?>
+           
         </div>
-    </div>
+</div>

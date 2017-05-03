@@ -1,4 +1,3 @@
-<!-- Head -->
 <?php 
 $navbar = array(
                  'page_title' => $page_title,
@@ -18,6 +17,11 @@ $this->load->view('_partials/navbar', $navbar);
                     <br>
                         <ul id="sortable" style="width: 500px">
                               <!-- list of bugs -->
+                              <?php if (!empty($userdata['panelData'])): ?>
+                                <?php foreach ($userdata['panelData'] as $key => $value): ?>
+                                    <?php $this->load->view('_partials/bugs', $value); ?>
+                                <?php endforeach ?>
+                              <?php endif ?>
                         </ul>
                 </div>
             </div>

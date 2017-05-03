@@ -7,7 +7,16 @@ $(function(){
 				   data : obj,
 				success : function(data){
 						// swal login success
-						window.location(data);
+						data = data.split("-");
+						if(data[0] == 1)
+						{
+							window.location = data[1];
+						}
+						else
+						{
+							alert("Wrong " + data[1])
+						}
+						
 					},
 				  error : function(){
 				  			console.log('error');

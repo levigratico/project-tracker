@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Createissue extends MY_Controller {
 
-	private $colname = ('');
+	private $insertArr = array();
 
 	public function __construct()
 	{
@@ -17,49 +17,73 @@ class Createissue extends MY_Controller {
 		$this->add_script('public/js/sortable.js');
 		$this->load->library('dropdown');
 		$var = $this->dropdown->getArr();
-		$this->addmViewData($var);
+		$this->addmViewData(array('tables' => $var));
+		$this->addmViewData(array('labels' => array(
+													'Assigned to',
+													'Module Type',
+													'QA Type',
+													'Git Repository',
+													'Platform type',
+													'Priority Level',
+													'Issue Type'
+												  ))
+						   						  );
 		$this->render('body/projecttracker');
 	}
 
 
 	public function insert()
 	{
-		$this->themodeloftruth->insertdata('issue_tbl', $this->getValue());
-		echo 'success';
+		 $this->getValue();
+		 $this->themodeloftruth->insertdata('issue_tbl', $this->insertArr);
+		 echo 'success';
+		 //print_r($this->insertArr);
 
 	}
 
-	private function getValue(){
-		$arr = array(
-						    'issue_title' => ($this->input->post('title') == TRUE) ? $this->input->post('title') : null,
-						     'issue_desc' => ($this->input->post('description') == TRUE) ? $this->input->post('description') : null,
-						     'created_by' => ($this->session->userdata('id') == TRUE) ? $this->session->userdata('id') : null,
-						    'assigned_to' => ($this->input->post('0') == TRUE) ? $this->input->post('0') : null,
-					     'modules_tbl_id' => ($this->input->post('1') == TRUE) ? $this->input->post('1') : null,
-						 	 'qa_type_id' => ($this->input->post('2') == TRUE) ? $this->input->post('2') : null,
-						 	'git_repo_id' => ($this->input->post('3') == TRUE) ? $this->input->post('3') : null,
-					   'platform_type_id' => ($this->input->post('4') == TRUE) ? $this->input->post('4') : null,
-					     'track_issue_id' => ($this->input->post('issue_id') == TRUE) ? $this->input->post('issue_id') : null,
-					      'issue_type_id' => ($this->input->post('6') == TRUE) ? $this->input->post('6') : null,
-					     'priority_level' => ($this->input->post('5') == TRUE) ? $this->input->post('5') : null,
-				   'issue_approved_by_id' => ($this->input->post('approved') == TRUE) ? $this->input->post('approved') : null,
-					     	   'isActive' => 1
-					);
+	private function getValue()
+	{
+	
+		$this->insertArr['issue_title']      = $this->input->post('title');
+		$this->insertArr['issue_desc']       = $this->input->post('description');
+		$this->insertArr['created_by']       = $this->session->userdata('id');
+		$this->insertArr['modules_tbl_id']   = $this->input->post('1');
+		$this->insertArr['qa_type_id']       = $this->input->post('2');
+		$this->insertArr['git_repo_id']      = $this->input->post('3');
+		$this->insertArr['platform_type_id'] = $this->input->post('4');
+		$this->insertArr['issue_type_id']    = $this->input->post('6');
+		$this->insertArr['priority_level']   = $this->input->post('5');
+		$this->insertArr['date_created']     = date('Y-m-d');
 
-		return $arr;
+		 if($this->input->post('0'))
+		 {
+		 	         $this->insertArr['assigned_to']  = $this->input->get_post('0');
+		 }
+		 if($this->input->post('issue_id'))
+		 {
+		 	      $this->insertArr['track_issue_id']  = $this->input->post('issue_id');
+		 }
+		 if($this->input->post('approved'))
+		 {
+		 	$this->insertArr['issue_approved_by_id']  = $this->input->post('approved');
+		 }
+
+		$this->insertArr['issue_status'] = 'PENDING';
+		$this->insertArr['isActive'] = 1;
+
+
+
+		
 	}
 
 
-	public function createWithTrackId($id, $title,$approved_by)
+	public function createWithTrackId($id)
 	{
 			$this->themodeloftruth->updateisActive(array('isActive' => 0), 'issue_tbl', array('id' => $id));
-			$this->addmViewData(
-						  array(
-								            'track_id' => $id,
-								         'track_title' => $title,
-								'issue_approved_by_id' => $approved_by
-							   )
-						  	   );
+			$this->load->library('issuetracking', $this->themodeloftruth->select_issue($id));
+			$this->addmViewData($this->themodeloftruth->select_issue($id));
+			$this->addmViewData(array('rel_data' => $this->issuetracking->builder()));
+			$this->addmViewData(array('track_id' => $id));
 			$this->index();
 	}
 }

@@ -85,9 +85,10 @@ html,body {
     margin-left: 15px;
 }
 
-.fa-bell {
+.fa-bell, .fa-shopping-cart {
     color: white !important;
-    margin: 10px 100px 20px 2px;
+    margin: 10px 50px 20px 2px;
+    font-size: 20px !important;
 }
 
 .createTab {

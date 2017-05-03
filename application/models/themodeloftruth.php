@@ -49,36 +49,21 @@ class Themodeloftruth extends CI_Model {
 
 	function record_count()
 	{
-		return $this->db->select('*')
-						->from('issue_tbl')
-					//	->where('issue_status', 'pending')
-						->where('isActive', 1)
-						->where('issue_approved_by_id is NOT ', NULL, FALSE)
-						->get()
-						->num_rows();
+
+						
 	}
 
-	function fetch_issues($limit, $start)
+	function fetch_issues($sql = array())
 	{
-		$query = $this->db->select('id,issue_title,issue_desc,track_issue_id,issue_approved_by_id')
-						->from('issue_tbl')
-					//	->where('issue_status', 'pending')
-						->where('isActive', 1)
-						->where('issue_approved_by_id is NOT ', NULL, FALSE)
-						->limit($limit, $start)
-						->get();
-		if($query->num_rows() > 0)
+		$temp = array();
+		foreach ($sql as $key => $value) 
 		{
-			foreach ($query->result() as $row)
-			{
-				# code...
-				$data[] = $row;
-			}
-
-			return $data;
+			# code..	
+			$data = $this->db->query($value)->result_array();
+			$temp = (empty($temp)) ? $data : array_merge($temp, $data);
 		}
 
-		return false;
+		return $temp;
 	}
 
 
@@ -101,6 +86,99 @@ class Themodeloftruth extends CI_Model {
 						->where("id", $id)
 						->get()
 						->result('array')[0];
+	}
+
+
+
+	function login($obj = array())
+	{
+		$sel = $this->db->select('*')->from('user_tbl');
+		foreach ($obj as $key => $value) {
+		 	# code...
+		 	$sel = $sel->where($key, $value);
+		 }
+
+		 return $sel->get(); 
+				
+	}
+
+
+	function selectCartIssue($arr = array())
+	{
+		return $this->db->select('id,issue_title,issue_desc')
+						->where_in('id', $arr)
+						->get('issue_tbl')
+						->result();
+	}
+
+
+
+	function verify($id)
+	{
+		$query = $this->db->select('*')->where('id', $id);
+		if($this->session->userdata('access_type') == 1)
+		{
+			$query = $query->where('assigned_to IS NOT ', NULL, FALSE);
+		}
+		else
+		{
+			$query = $query->where('assigned_qa IS NOT ', NULL, FALSE);
+		}
+
+		return $query->get('issue_tbl')->num_rows();
+	}
+
+
+	function update($id, $table)
+	{
+		$ass = ($this->session->userdata('access_type') == 1) ? 'assigned_to' : 'assigned_qa';
+		$update = $this->db->set($ass, $this->session->userdata('id'));
+		if($this->session->userdata('access_type') == 1)
+		{
+			$update = $update->set('start_date', date("Y-m-d"));
+		}
+		return $update->set('issue_status', 'PENDING')
+					  ->where('id', $id)
+					  ->update($table); 
+
+	}
+
+
+	function commonquery($sql)
+	{
+		return $this->db->query($sql)->result('array');
+	}
+
+	function select_issue($id)
+	{
+		return $this->db->select("*")
+						->where("id", $id)
+						->get("issue_tbl")
+						->result('array')[0];
+	}
+
+	// custom function for my library
+	function getsetValue($table, $id)
+	{
+		return $this->db->select("*")
+						->where("id", $id)
+						->get($table)
+						->result('array')[0];
+	
+	}					
+
+	function approveIssue($id)
+	{
+		return $this->db->set('isActive', 1)->set('issue_approved_by_id', $this->session->userdata('id'))
+				 ->where('id', $id)
+				 ->update("issue_tbl");
+	}
+
+	function done($id)
+	{
+		return $this->db->set('issue_status', "DONE")
+				 ->where('id', $id)
+				 ->update("issue_tbl");
 	}
 }
 

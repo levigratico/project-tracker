@@ -18,81 +18,26 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="md-form">
-                                       <input type="text" id="form3" class="form-control" value="<?php echo empty($userdata['track_title']) ? '' : urldecode($userdata['track_title']); ?>">
+                                       <input type="text" id="form3" class="form-control" value="<?php echo empty($userdata['issue_title']) ? '' : urldecode($userdata['issue_title']); ?>">
                                        <label for="form3">Issue Title:</label>
                                    </div>
-                                   <!--DROPDOWN FOR ASSIGN-->
-                                   <div class="btn-group pull-right">
-                                       <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                       <div class="dropdown-menu">
-                                          <?php loopDropDownItem($userdata['user_tbl'], 0); ?>
-                                       </div>
-                                   </div>
-                                    <div class="divassigned">
-                                        <p>Assigned to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-
-                                    </div>
-                                      <!--DROPDOWN FOR MODULE-->
-                                    <div class="btn-group pull-right">
-                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['modules_tbl'], 1); ?>
-                                        </div>
-                                    </div>
-                                    <div class="divmodule" style="border-color: red">
-                                       <p>Module Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
-                                    <!--DROPDOWN FOR QA-->
-                                    <div class="btn-group pull-right">
-                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['qa_type_tbl'], 2); ?>
-                                        </div>
-                                    </div>
-                                    <div class="divqa" style="border-color: red">
-                                       <p>QA Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
-                                    <!--DROPDOWN FOR GIT-->
-                                    <div class="btn-group pull-right">
-                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['git_repo_tbl'], 3); ?>
-                                        </div>
-                                    </div>
-                                    <div class="divgit" style="border-color: red">
-                                       <p>Git Repository:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
-                                    <!--DROPDOWN FOR PLATFORM-->
-                                    <div class="btn-group pull-right">
-                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['platform_type'], 4); ?>
-                                        </div>
-                                    </div>
-                                    <div class="divplat" style="border-color: red">
-                                       <p>Platform type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
-                                    <!--DROPDOWN FOR PRIORITY-->
-                                    <div class="btn-group pull-right">
-                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['priority_level'], 5); ?>
-                                        </div>
-                                    </div>
-                                    <div class="divpriority" style="border-color: red">
-                                       <p>Priority Level:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
-
-                                     <!--DROPDOWN FOR PRIORITY-->
-                                    <div class="btn-group pull-right">
-                                        <a class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort pull-right" aria-hidden="true"></i></a>
-                                        <div class="dropdown-menu">
-                                            <?php loopDropDownItem($userdata['issue_type'], 6); ?>
-                                        </div>
-                                    </div>
-                                    <div class="divissuetype" style="border-color: red">
-                                       <p>Issue Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></p>
-                                    </div>
+                                  
+                                  <!-- dorpdowns -->
+                                    <?php
+                                     $i = 0;
+                                     foreach ($userdata['tables'] as $key => $value): 
+                                     ?>
+                                    <?php 
+                                      $element = array('tableview' => $value, 'label' => $userdata['labels'][$i], 'index' => $i);
+                                      if(!empty($userdata['track_id']))
+                                      {
+                                       $element['test'] = $userdata['rel_data'][$i];
+                                      }
+                                      $this->load->view('_partials/_form/dropdownview', $element); 
+                                       $i++;
+                                     ?>
+                                    <?php endforeach ?>
+                                   <!-- ./dorpdowns -->
 
                                     <div class="md-form">
                                         <input type="text" id="form1" class="form-control">

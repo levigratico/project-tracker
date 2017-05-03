@@ -42,8 +42,54 @@ $config['mydata'] = array(
 	);
 
 
-$config['tables'] = array('child_module_tbl', 'departments_tbl', 'git_repo_tbl', 'issue_tbl', 'issue_type', 'modules_tbl', 'platform_type', 'platform_type_accounts', 'priority_level', 'qa_type_tbl', 'status', 'user_tbl');
+$config['tables'] = array('child_module_tbl',
+						  'departments_tbl', 
+						  'git_repo_tbl', 
+						  'issue_tbl',
+						  'issue_type', 
+						  'modules_tbl', 
+						  'platform_type', 
+						  'platform_type_accounts', 
+						  'priority_level', 
+						  'qa_type_tbl', 
+						  'status', 
+						  'user_tbl'
+						 );
 
+
+$config['menu'] = array(
+	   'mywork' => array(
+	   					   'image' => 'public/img/server.png',
+	   					   'title' => 'My Work',
+	   					  'pclass' => 'pWork',
+	   					  	'link' => 'index.php/home'
+	   					),
+	  'backlog' => array(
+	  					   'image' => 'public/img/inbox.png',
+	   					   'title' => 'Current/Backlog',
+	   					  'pclass' => 'pCurrent',
+	   					  	'link' => 'index.php/common/index/1'
+	  					),
+	  'issue' => array(
+	  					   'image' => 'public/img/search-problem.png',
+	   					   'title' => 'Issue',
+	   					  'pclass' => 'pIssue',
+	   					  	'link' => 'index.php/listofissue'
+	  					),
+	  'done' => array(
+	  					   'image' => 'public/img/browser.png',
+	   					   'title' => 'Done',
+	   					  'pclass' => 'pDone',
+	   					  	'link' => 'index.php/common/index/2'
+	  					),
+	   'approve' => array(
+	  					   'image' => 'public/img/browser.png',
+	   					   'title' => 'Issue to Approve',
+	   					  'pclass' => 'pAprove',
+	   					  	'link' => 'index.php/common/index/3'
+	  					)
+
+					   );
 
 
 

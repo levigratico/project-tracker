@@ -1,12 +1,11 @@
 <?php 
 $navbar = array(
-                 'page_title' => $page_title,
-                 'user_name' => 'levi'
-               );
+         'page_title' => $page_title,
+         'user_name' => $this->session->userdata('firstname')
+         );
 $this->load->view('_partials/navbar', $navbar); 
 ?>
 <?php echo PHP_EOL;?>
-
 <div class="row" style="height:100%;">
     <div class="col-md-9 push-md-3 colTrackTwo">
         <div class="tabIssue" id="tabIssue">
@@ -25,7 +24,24 @@ $this->load->view('_partials/navbar', $navbar);
                                 <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
                                     <?php if ($userdata['results']): ?>
                                         <?php foreach ($userdata['results'] as $data): ?>
-                                           <?php $this->load->view('_partials/issue_cardview', $data); ?>
+                                           <?php
+                                           $hasCommon = FALSE;
+                                           $temp = explode(" ", $this->session->userdata('cart')); 
+                                           foreach ($temp as $key => $value) 
+                                           {
+                                               # code...
+                                               if($data['id'] == $value)
+                                               {
+                                                    $hasCommon = TRUE;
+                                                    break;
+                                               }
+                                           }
+                                           if(!$hasCommon)
+                                           {
+                                            $this->load->view('_partials/issue_cardview', $data);
+                                           }
+                                           
+                                           ?>
                                        <?php endforeach ?>
                                     <?php endif ?>
                                 </div>
@@ -39,7 +55,11 @@ $this->load->view('_partials/navbar', $navbar);
             </div>
         </div>
     </div> <!-- end colTrackTwo -->
-    <?php echo PHP_EOL;?>
-    <?php $this->load->view('_partials/sidebar', array('user_name' => 'levi')); ?><!-- coltrackone -->
-    <?php echo PHP_EOL;?>
+   <?php
+    echo PHP_EOL;
+    $arr = array(); 
+    $arr['sidebar'] = data_builder($this->session->userdata('access_type'));
+    $this->load->view('_partials/sidebar', $arr); 
+    echo PHP_EOL;
+    ?>
 </div> <!-- end of row -->
