@@ -110,7 +110,7 @@
 
 			if($this->boolChecker == 0)
 			{
-
+				$sql[0] = "SELECT * FROM issue_tbl WHERE issue_type_id IN (1,2,3)";
 			}
 			else if($this->boolChecker == 1)
 			{
@@ -120,12 +120,12 @@
 			}
 			else if($this->boolChecker == 2)
 			{
-				$sql[0] = "SELECT * FROM issue_tbl WHERE assigned_to IS NOT NULL AND qa_type_id IS NULL AND git_repo_id = " . $this->CI->session->userdata('git_repo_type');
+				$sql[0] = "SELECT * FROM issue_tbl WHERE assigned_to =  IS NOT NULL AND qa_type_id IS NULL AND git_repo_id = " . $this->CI->session->userdata('git_repo_type');
 
 			}
 			else
 			{
-
+				$sql[0] = "SELECT * FROM issue_tbl WHERE issue_type_id IN (1,2,3)";
 			}
 
 
