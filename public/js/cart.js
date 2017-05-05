@@ -16,15 +16,15 @@ $(function(){
 		 			{
 
 		 				$("#badge").text(data);
-		 				
+
 		 			}
-		 			
+
 		  	 },
 		  	  error : function(){
 		  	  	console.log("error");
 		  	}
 		  });
-		 
+
 	});
 
 	$(".cancel").click(function(){

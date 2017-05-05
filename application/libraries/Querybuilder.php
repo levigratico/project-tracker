@@ -21,34 +21,6 @@
 			$this->CI->load->model('themodeloftruth');
 		}
 
-
-
-		public function mywork()
-		{
-			$sql = array();
-			if($this->boolChecker == 1)
-			{
-				$sql[0] = "SELECT * FROM issue_tbl WHERE issue_status = 'PENDING' AND issue_type_id = 1 AND assigned_to = ".$this->CI->session->userdata('id');
-			}
-			else if($this->boolChecker == 2)
-			{
-				$sql[0] = "SELECT * FROM issue_tbl WHERE issue_status = 'PENDING' AND issue_type_id = 1 AND assigned_to = ".$this->CI->session->userdata('id');
-				$sql[1] = "SELECT * FROM issue_tbl WHERE issue_status = 'DONE'";
-			}
-			else
-			{
-
-			}
-
-			if(!empty($sql))
-			{
-				$this->fetch($sql);
-			}
-
-			return false;
-		}
-
-
 		public function done()
 		{
 			$sql = array();
@@ -84,10 +56,10 @@
 			$sql = array();
 			if($this->boolChecker == 1)
 			{
-				$sql[0] = "SELECT * FROM issue_tbl WHERE issue_status =
+				/*$sql[0] = "SELECT * FROM issue_tbl WHERE issue_status =
 			 		'PENDING' AND assigned_to = " .
-			 		$this->CI->session->userdata('id');
-			 	$sql[1] = "SELECT * FROM issue_tbl WHERE track_issue_id IS NOT NULL AND isActive = 1 AND assigned_to = " .
+			 		$this->CI->session->userdata('id');*/
+			 	$sql[0] = "SELECT * FROM issue_tbl WHERE start_date IS NOT NULL AND isActive = 1 AND assigned_to = " .
 			 		$this->CI->session->userdata('id');
 
 			}
