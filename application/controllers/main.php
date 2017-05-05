@@ -34,7 +34,7 @@ class Main extends  MY_Controller {
 		 	{
 		 		 //wrong password
 		 		echo '0-password';
-		 	}	
+		 	}
 		 }
 		 else
 		 {

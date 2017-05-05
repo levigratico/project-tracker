@@ -1,4 +1,4 @@
-    
+
 	var obj = {};
 
 
@@ -15,6 +15,10 @@
     	return false;
     });
 
+    /*$(".thechoosen").click(function(){
+      $(this).hide():
+    });*/
+
 
     $(".btnsave").click(function(){
         if(jQuery.isEmptyObject(obj))
@@ -29,9 +33,9 @@
         }
     	obj['title'] = $("#form3").val();
     	obj['description'] = $("#form1").val();
-        
-           
-        
+
+
+
 
 
 
@@ -75,8 +79,8 @@
 		 {
 		 	$(span[i]).find("span").text(" ");
 		 }
-		 
-	
+
+
 
 		$("#form1").val(" ");
 		$("#form3").val(" ");
@@ -84,11 +88,3 @@
         $("#track_id").val(" ");
 
     }
-
-
-
-
-
-
-
-   

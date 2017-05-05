@@ -43,7 +43,7 @@ class Createissue extends MY_Controller {
 
 	private function getValue()
 	{
-	
+
 		$this->insertArr['issue_title']      = $this->input->post('title');
 		$this->insertArr['issue_desc']       = $this->input->post('description');
 		$this->insertArr['created_by']       = $this->session->userdata('id');
@@ -57,11 +57,11 @@ class Createissue extends MY_Controller {
 
 		 if($this->input->post('0'))
 		 {
-		 	         $this->insertArr['assigned_to']  = $this->input->get_post('0');
+		 	$this->insertArr['assigned_to']  = $this->input->get_post('0');
 		 }
 		 if($this->input->post('issue_id'))
 		 {
-		 	      $this->insertArr['track_issue_id']  = $this->input->post('issue_id');
+		 	$this->insertArr['track_issue_id']  = $this->input->post('issue_id');
 		 }
 		 if($this->input->post('approved'))
 		 {
@@ -73,7 +73,7 @@ class Createissue extends MY_Controller {
 
 
 
-		
+
 	}
 
 

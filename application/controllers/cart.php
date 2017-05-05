@@ -46,14 +46,14 @@ class Cart extends MY_Controller {
 		     	{
 		     		echo 0;
 		     	}
-			  	
-			    
+
+
 		     }
 		     else
 		    {
 		    	echo 'error';
 		    }
-		
+
 		}
 		else
 		{
@@ -98,8 +98,6 @@ class Cart extends MY_Controller {
 		}
 
 		$this->session->unset_userdata('cart');
-		
-		
 	}
 
 }
